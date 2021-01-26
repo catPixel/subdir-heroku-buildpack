@@ -7,6 +7,7 @@ ENV_DIR=${3:-}
 
 if [ -f $ENV_DIR/PROJECT_PATH ]; then
 	PROJECT_PATH=`cat $ENV_DIR/PROJECT_PATH`
+	PROJECT_CONF_PATH=`cat $ENV_DIR/PROJECT_CONF_PATH`
 	if [ -d $BUILD_DIR/$PROJECT_PATH ]; then
 		echo "-----> Subdir buildpack in $PROJECT_PATH"
 		echo "       creating cache: $CACHE_DIR"
@@ -15,9 +16,10 @@ if [ -f $ENV_DIR/PROJECT_PATH ]; then
 		echo "       created tmp dir: $TMP_DIR"
 		echo "       moving working dir: $PROJECT_PATH to $TMP_DIR"
 		cp -R $BUILD_DIR/$PROJECT_PATH/. $TMP_DIR/
+		cp -R $BUILD_DIR/$PROJECT_CONF_PATH/. $TMP_DIR/
 
-		echo "       pwd command: "
-		pwd
+		echo "       cd command: $TMP_DIR"
+		cd $TMP_DIR/
 		echo "       ls -l -a command: "
 		ls -l -a
 
