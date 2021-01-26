@@ -16,24 +16,17 @@ if [ -f $ENV_DIR/PROJECT_PATH ]; then
 		echo "       created tmp dir: $TMP_DIR"
 		echo "       moving working dir: $PROJECT_PATH to $TMP_DIR"
 		cp -R $BUILD_DIR/$PROJECT_PATH/. $TMP_DIR/
+		echo "       moving config files dir: $PROJECT_CONF_PATH to $TMP_DIR"
 		cp -R $BUILD_DIR/$PROJECT_CONF_PATH/. $TMP_DIR/
-
-		echo "       cd command: $TMP_DIR"
-		cd $TMP_DIR/
-		echo "       ls -l -a command: "
-		ls -l -a
-
-		echo "       exit: "
-		exit 1
-	 	#echo "       cleaning build dir $BUILD_DIR"
-		#rm -rf $BUILD_DIR
-		#echo "       recreating $BUILD_DIR"
-		#mkdir -p $BUILD_DIR
-		#echo "       copying preserved work dir from cache $TMP_DIR to build dir $BUILD_DIR"
-		#cp -R $TMP_DIR/. $BUILD_DIR/
-		#echo "       cleaning tmp dir $TMP_DIR"
-		#rm -rf $TMP_DIR
-		#exit 0
+	 	echo "       cleaning build dir $BUILD_DIR"
+		rm -rf $BUILD_DIR
+		echo "       recreating $BUILD_DIR"
+		mkdir -p $BUILD_DIR
+		echo "       copying preserved work dir from cache $TMP_DIR to build dir $BUILD_DIR"
+		cp -R $TMP_DIR/. $BUILD_DIR/
+		echo "       cleaning tmp dir $TMP_DIR"
+		rm -rf $TMP_DIR
+		exit 0
 	fi
 fi
 
